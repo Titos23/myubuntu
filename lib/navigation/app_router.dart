@@ -64,7 +64,7 @@ class AppRouter extends RouterDelegate
     }
 
     if (route.settings.name == FooderlichPages.onboardingPath) {
-      appStateManager.logout();
+      appStateManager.signout();
     }
     if (route.settings.name == FooderlichPages.passItemDetails) {
       passManager.passItemTapped(-1);

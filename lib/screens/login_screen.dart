@@ -24,6 +24,15 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreen extends State<LoginScreen> {
+  late final _nameC;
+  late final _passC;
+
+  @override
+  void initState() {
+    _nameC = TextEditingController();
+    _passC = TextEditingController();
+    super.initState();
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -55,6 +64,7 @@ class _LoginScreen extends State<LoginScreen> {
                   ),
                   labelText: 'Username',
                 ),
+                controller: _nameC,
               ),
               const Padding(padding: EdgeInsets.all(20)),
               TextField(
@@ -65,13 +75,15 @@ class _LoginScreen extends State<LoginScreen> {
                   labelText: 'Password',
                 ),
                 obscureText: true,
+                controller: _passC,
               ),
               ButtonBar(
                 children: [
                   ElevatedButton(
                     child: const Text('Connect'),
                     onPressed: () {
-                      Provider.of<AppStateManager>(context,listen: false).login();              
+                      Provider.of<AppStateManager>(context, listen: false)
+                        .login(context,mail: _nameC.text, pass: _passC.text);              
                     },
                   ),
                   TextButton(
