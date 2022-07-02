@@ -18,8 +18,11 @@ class PassScreen extends StatelessWidget {
             padding: EdgeInsets.only(right: 20),child: 
               IconButton(
                 icon: Icon(Icons.account_circle),
-                onPressed: Provider.of<AppStateManager>(context, listen: false).signout(),
-                ),
+                onPressed: () {
+                  final maanager = Provider.of<AppStateManager>(context, listen: false);
+                  maanager.signout();
+                },
+              ),
           )
         ],
       ),

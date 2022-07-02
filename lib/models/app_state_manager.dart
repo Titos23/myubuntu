@@ -56,5 +56,7 @@ class AppStateManager extends ChangeNotifier {
 
   signout () async {
     await FirebaseAuth.instance.signOut();
+    _loggedIn = false;
+    notifyListeners();
   }
 }
