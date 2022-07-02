@@ -45,6 +45,7 @@ class PassItemScreen extends StatefulWidget {
 }
 
 class _PassItemScreenState extends State<PassItemScreen> {
+
   final _nameController = TextEditingController();
   String _name = '';
   DateTime _dueDate = DateTime.now();
@@ -70,6 +71,7 @@ class _PassItemScreenState extends State<PassItemScreen> {
                   _timeOfDay.hour,
                   _timeOfDay.minute,
                 ),
+              
               );
 
               if (widget.isUpdating) {

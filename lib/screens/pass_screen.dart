@@ -13,8 +13,14 @@ class PassScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Center(child: Text('Sold Pass')),
-        actions: const[
-          Padding (padding: EdgeInsets.only(right: 20),child: Icon(Icons.account_circle),)
+        actions: [
+          Padding (
+            padding: EdgeInsets.only(right: 20),child: 
+              IconButton(
+                icon: Icon(Icons.account_circle),
+                onPressed: Provider.of<AppStateManager>(context, listen: false).signout(),
+                ),
+          )
         ],
       ),
       floatingActionButton: FloatingActionButton(
