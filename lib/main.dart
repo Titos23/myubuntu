@@ -34,6 +34,7 @@ class _FooderlichState extends State<Fooderlich> {
       passManager: _passManager,
     );
     _appStateManager.init();
+    _passManager.init();
   }
 
   @override

@@ -1,9 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
+import '../components/directory.dart';
 
 import 'pass_item.dart';
+import '../api/database.dart';
+
 
 class PassManager extends ChangeNotifier {
-  final _passItems = <PassItem>[];
+
+  
+  
+  late PassDatabase db;
+  var _passItems = <PassItem>[];
+  init1() async {
+    await requestPermission(Permission.storage);
+    
+  }
+  init()async {
+    init1();
+    db = PassDatabase.instance;
+    db.database;
+    _passItems = await db.readAll();
+    print(_passItems);
+  }
+  
   int _selectedIndex = -1;
   bool _createNewItem = false;
 
@@ -56,4 +76,5 @@ class PassManager extends ChangeNotifier {
     _passItems[index] = item.copyWith(isComplete: change);
     notifyListeners();
   }
+  
 }

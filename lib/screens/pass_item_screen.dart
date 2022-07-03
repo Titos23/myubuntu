@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
+import 'package:provider/provider.dart';
 
 import '../components/pass_tile.dart';
 import '../models/models.dart';
@@ -63,7 +64,6 @@ class _PassItemScreenState extends State<PassItemScreen> {
               final passItem = PassItem(
                 id: widget.originalItem?.id ?? const Uuid().v1(),
                 name: _nameController.text,
-                color: _currentColor,
                 date: DateTime(
                   _dueDate.year,
                   _dueDate.month,
@@ -78,6 +78,8 @@ class _PassItemScreenState extends State<PassItemScreen> {
                 widget.onUpdate(passItem, widget.index);
               } else {
                 widget.onCreate(passItem);
+                final db = Provider.of<PassManager>(context, listen: false).db;
+                db.add(passItem);
               }
             },
           )
@@ -102,7 +104,6 @@ class _PassItemScreenState extends State<PassItemScreen> {
               item: PassItem(
                 id: 'previewMode',
                 name: _name,
-                color: _currentColor,
                 date: DateTime(
                   _dueDate.year,
                   _dueDate.month,
@@ -227,7 +228,6 @@ class _PassItemScreenState extends State<PassItemScreen> {
     if (originalItem != null) {
       _name = originalItem.name;
       _nameController.text = originalItem.name;
-      _currentColor = originalItem.color;
       final date = originalItem.date;
       _timeOfDay = TimeOfDay(hour: date.hour, minute: date.minute);
       _dueDate = date;

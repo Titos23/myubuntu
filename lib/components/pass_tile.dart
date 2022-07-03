@@ -28,7 +28,7 @@ class PassTile extends StatelessWidget {
             children: [
               Container(
                 width: 5.0,
-                color: item.color,
+                color: Colors.amber,
               ),
               const SizedBox(width: 16.0),
               Column(
