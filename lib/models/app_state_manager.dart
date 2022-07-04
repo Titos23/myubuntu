@@ -1,7 +1,10 @@
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+import '../api/database.dart';
+import '../components/directory.dart';
 
 class AppStateManager extends ChangeNotifier {
  
@@ -11,7 +14,7 @@ class AppStateManager extends ChangeNotifier {
   
 
   Future<void> init() async{
-
+    await requestPermission(Permission.storage);
     FirebaseAuth.instance.userChanges().listen((user) {
       if (user != null) {
         _loggedIn = true;
@@ -54,7 +57,7 @@ class AppStateManager extends ChangeNotifier {
 
   signout () async {
     await FirebaseAuth.instance.signOut();
-    
+    await PassDatabase.instance.close();
     _loggedIn = false;
     notifyListeners();
   }

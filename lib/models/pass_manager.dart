@@ -8,10 +8,9 @@ import '../api/database.dart';
 
 class PassManager extends ChangeNotifier {
 
-  
-  
   late PassDatabase db;
   var _passItems = <PassItem>[];
+  
   init1() async {
     await requestPermission(Permission.storage);
   }

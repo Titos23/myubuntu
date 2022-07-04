@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
 import '../models/models.dart';
 import 'empty_pass_screen.dart';
 import '../components/pass_tile.dart';
 
 class PassScreen extends StatelessWidget {
   const PassScreen({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +45,15 @@ class PassScreen extends StatelessWidget {
           return FutureBuilder(
             future: manager.getItems(),
             builder: (context, AsyncSnapshot<List<PassItem>> snapshot) {
+
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return CircularProgressIndicator();
               }
+
               if (snapshot.connectionState == ConnectionState.done) {
+                if(snapshot.data?.length == 0) {
+                  return EmptyPassScreen();
+                }
                 if (snapshot.data?.length != null){
                     return Padding(
                       padding: const EdgeInsets.all(16.0),
@@ -63,13 +70,11 @@ class PassScreen extends StatelessWidget {
                         },
                       ),
                     );
-                } else  {
-                  return EmptyPassScreen();
-                }
-                
-              }
+                }           
+              } 
               
-              return Text("Something went wrong");
+              
+              return EmptyPassScreen();
               
   }
             
