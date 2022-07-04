@@ -47,52 +47,55 @@ class _LoginScreen extends State<LoginScreen> {
         appBar:AppBar(),
         body:  Padding(
           padding: const EdgeInsets.all(5),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Padding(padding: EdgeInsets.all(20)),
-              SizedBox(
-                height: 200,
-                child: Image.asset('assets/lgw.jpg'),
-              ),
-              const Padding(padding: EdgeInsets.all(20)),
-              TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  labelText: 'Username',
+          child: SingleChildScrollView(
+            reverse: true,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Padding(padding: EdgeInsets.all(20)),
+                SizedBox(
+                  height: 200,
+                  child: Image.asset('assets/lgw.jpg'),
                 ),
-                controller: _nameC,
-              ),
-              const Padding(padding: EdgeInsets.all(20)),
-              TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
+                const Padding(padding: EdgeInsets.all(20)),
+                TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    labelText: 'Username',
                   ),
-                  labelText: 'Password',
+                  controller: _nameC,
                 ),
-                obscureText: true,
-                controller: _passC,
-              ),
-              ButtonBar(
-                children: [
-                  ElevatedButton(
-                    child: const Text('Connect'),
-                    onPressed: () {
-                      Provider.of<AppStateManager>(context, listen: false)
-                        .login(context,mail: _nameC.text, pass: _passC.text);              
-                    },
+                const Padding(padding: EdgeInsets.all(20)),
+                TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    labelText: 'Password',
                   ),
-                  TextButton(
-                    child: const Text('Cancel'),
-                    onPressed: () {},
-                  ),
-                ],
-              )
-            ],
+                  obscureText: true,
+                  controller: _passC,
+                ),
+                ButtonBar(
+                  children: [
+                    ElevatedButton(
+                      child: const Text('Connect'),
+                      onPressed: () {
+                        Provider.of<AppStateManager>(context, listen: false)
+                          .login(context,mail: _nameC.text, pass: _passC.text);              
+                      },
+                    ),
+                    TextButton(
+                      child: const Text('Cancel'),
+                      onPressed: () {},
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

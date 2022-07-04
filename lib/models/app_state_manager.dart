@@ -1,12 +1,13 @@
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AppStateManager extends ChangeNotifier {
  
-  bool _loggedIn = false;
+  bool? _loggedIn  = false;
 
-  bool get isLoggedIn => _loggedIn;
+  bool? get isLoggedIn => _loggedIn;
   
 
   Future<void> init() async{
@@ -53,6 +54,7 @@ class AppStateManager extends ChangeNotifier {
 
   signout () async {
     await FirebaseAuth.instance.signOut();
+    
     _loggedIn = false;
     notifyListeners();
   }

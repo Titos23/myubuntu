@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../models/models.dart';
 import 'empty_pass_screen.dart';
-import 'pass_list_screen.dart';
+import '../components/pass_tile.dart';
 
 class PassScreen extends StatelessWidget {
   const PassScreen({Key? key}) : super(key: key);
@@ -40,11 +40,40 @@ class PassScreen extends StatelessWidget {
   Widget buildpassScreen() {
     return Consumer<PassManager>(
       builder: (context, manager, child) {
-        if (manager.passItems.isNotEmpty) {
-          return PassListScreen(manager: manager);
-        } else {
-          return const EmptyPassScreen();
-        }
+          return FutureBuilder(
+            future: manager.getItems(),
+            builder: (context, AsyncSnapshot<List<PassItem>> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              }
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.data?.length != null){
+                    return Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: ListView.separated(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          final item = snapshot.data![index];
+                          return PassTile(
+                            key: Key(item.id),
+                            item: item);
+                        },
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(height: 16.0);
+                        },
+                      ),
+                    );
+                } else  {
+                  return EmptyPassScreen();
+                }
+                
+              }
+              
+              return Text("Something went wrong");
+              
+  }
+            
+          );
       },
     );
   }

@@ -14,14 +14,13 @@ class PassManager extends ChangeNotifier {
   var _passItems = <PassItem>[];
   init1() async {
     await requestPermission(Permission.storage);
-    
   }
-  init()async {
+  Future<List<PassItem>> getItems ()async {
     init1();
     db = PassDatabase.instance;
     db.database;
     _passItems = await db.readAll();
-    print(_passItems);
+    return(_passItems);
   }
   
   int _selectedIndex = -1;
@@ -36,6 +35,7 @@ class PassManager extends ChangeNotifier {
   bool get isCreatingNewItem => _createNewItem;
 
   void createNewItem() {
+    init1();
     _createNewItem = true;
     notifyListeners();
   }
