@@ -10,6 +10,7 @@ environment:
 dependencies:
   firebase_auth: ^3.3.20
   firebase_core: ^1.18.0
+  cloud_firestore: ^3.1.15
   flutter:
     sdk: flutter
   google_fonts: ^2.1.0

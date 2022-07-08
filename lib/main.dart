@@ -53,7 +53,7 @@ class _FooderlichState extends State<Fooderlich> {
               useMaterial3: true,
               primarySwatch: Colors.amber,
             ),
-            title: 'Fooderlich',
+            title: 'My Ubuntu',
             home: Router(
               routerDelegate: _appRouter,
               backButtonDispatcher: RootBackButtonDispatcher(),

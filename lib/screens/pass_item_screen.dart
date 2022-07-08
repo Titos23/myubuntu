@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../components/pass_tile.dart';
 import '../models/models.dart';
@@ -79,7 +81,10 @@ class _PassItemScreenState extends State<PassItemScreen> {
               } else {
                 widget.onCreate(passItem);
                 final db = Provider.of<PassManager>(context, listen: false).db;
+                final dab = FirebaseFirestore.instance.collection("myubuntu").doc("soldpass").collection(FirebaseAuth.instance.currentUser!.uid);
+                dab.doc(passItem.id).set(passItem.toMap());
                 db.add(passItem);
+                
               }
             },
           )
