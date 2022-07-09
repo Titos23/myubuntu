@@ -6,10 +6,14 @@ import '../models/models.dart';
 import 'empty_pass_screen.dart';
 import '../components/pass_tile.dart';
 
-class PassScreen extends StatelessWidget {
+class PassScreen extends StatefulWidget {
   const PassScreen({Key? key}) : super(key: key);
 
+  @override
+  State<PassScreen> createState() => _PassScreenState();
+}
 
+class _PassScreenState extends State<PassScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

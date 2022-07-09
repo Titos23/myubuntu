@@ -11,7 +11,7 @@ class PassItem {
   final String id;
   final String name;
   final DateTime date;
-  final bool isComplete;
+  bool isComplete;
 
   PassItem({
     required this.id,

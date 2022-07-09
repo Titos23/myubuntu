@@ -84,7 +84,6 @@ class _PassItemScreenState extends State<PassItemScreen> {
                 final dab = FirebaseFirestore.instance.collection("myubuntu").doc("soldpass").collection(FirebaseAuth.instance.currentUser!.uid);
                 dab.doc(passItem.id).set(passItem.toMap());
                 db.add(passItem);
-                
               }
             },
           )
