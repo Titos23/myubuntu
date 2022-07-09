@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myubuntu/screens/signup_screen.dart';
 
 import '../models/models.dart';
 import '../screens/screens.dart';
@@ -35,7 +36,9 @@ class AppRouter extends RouterDelegate
       onPopPage: _handlePopPage,
       // 8
       pages: [
-        if (appStateManager.isLoggedIn == false) LoginScreen.page(),
+        if (appStateManager.isLoggedIn ==false) LoginScreen.page(),
+        if (appStateManager.isSignedup == true) SignUpScreen.page(),
+        // if (appStateManager.isLoggedIn == false && appStateManager.isSignedup == true) SignUpScreen.page(),
         if (appStateManager.isLoggedIn == true) Home.page(),
         if (passManager.isCreatingNewItem)
           PassItemScreen.page(onCreate: (item) {
@@ -63,11 +66,13 @@ class AppRouter extends RouterDelegate
       return false;
     }
 
-    if (route.settings.name == FooderlichPages.onboardingPath) {
-      appStateManager.signout();
-    }
     if (route.settings.name == FooderlichPages.passItemDetails) {
       passManager.passItemTapped(-1);
+    }
+
+    if (route.settings.name == FooderlichPages.signupPath) {
+      appStateManager.signupout();
+
     }
 
     return true;

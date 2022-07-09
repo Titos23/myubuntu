@@ -9,9 +9,23 @@ import '../components/directory.dart';
 class AppStateManager extends ChangeNotifier {
  
   bool? _loggedIn  = false;
+  bool? _signedup = false;
 
+  bool? get isSignedup => _signedup;
   bool? get isLoggedIn => _loggedIn;
+
+
+  late String username;
   
+  signup() {
+    _signedup = true;
+    notifyListeners();
+  }
+
+  signupout () {
+    _signedup = false;
+    notifyListeners();
+  }
 
   Future<void> init() async{
     await requestPermission(Permission.storage);
@@ -27,6 +41,33 @@ class AppStateManager extends ChangeNotifier {
     });
   } 
 
+  create (BuildContext context,{required String mail,required pass, })async{
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: mail,
+        password: pass,
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+       return ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("The password provided is too weak"),
+            duration: Duration(seconds: 2),
+          )
+        );
+      } else if (e.code == 'email-already-in-use') {
+        return ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("An account already exists for that email"),
+            duration: Duration(seconds: 2),
+          )
+        );
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   login(BuildContext context,{required String mail,required pass, }) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -40,7 +81,7 @@ class AppStateManager extends ChangeNotifier {
       if (e.code == 'user-not-found') {
         return ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text("The username entered is not found"),
+            content: Text("The email entered is not found"),
             duration: Duration(seconds: 2),
           )
         );
@@ -59,6 +100,7 @@ class AppStateManager extends ChangeNotifier {
     await FirebaseAuth.instance.signOut();
     await PassDatabase.instance.close();
     _loggedIn = false;
+    signupout();
     notifyListeners();
   }
 }

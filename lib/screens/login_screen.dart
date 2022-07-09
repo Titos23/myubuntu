@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myubuntu/screens/signup_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../models/models.dart';
@@ -64,7 +65,7 @@ class _LoginScreen extends State<LoginScreen> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    labelText: 'Username',
+                    labelText: 'Email',
                   ),
                   controller: _nameC,
                 ),
@@ -79,6 +80,7 @@ class _LoginScreen extends State<LoginScreen> {
                   obscureText: true,
                   controller: _passC,
                 ),
+                const Padding(padding: EdgeInsets.all(20)),
                 ButtonBar(
                   children: [
                     ElevatedButton(
@@ -89,10 +91,26 @@ class _LoginScreen extends State<LoginScreen> {
                       },
                     ),
                     TextButton(
-                      child: const Text('Cancel'),
-                      onPressed: () {},
+                      child: const Text('Clear'),
+                      onPressed: () {
+                        _nameC.clear();
+                        _passC.clear();
+                      },
                     ),
                   ],
+                ),
+                const Padding(padding: EdgeInsets.all(20)),
+                Center(
+                  child: InkWell(
+                    child: Text(
+                      "No account ? Sign up !",
+                      style: TextStyle(color: Colors.amber[900]),
+                    ),
+                    onTap: () {
+                      //Provider.of<AppStateManager>(context, listen: false).signup();
+                      Navigator.of(context).push(MaterialPageRoute(builder: ((context) => SignUpScreen())));
+                    },
+                ),
                 )
               ],
             ),
