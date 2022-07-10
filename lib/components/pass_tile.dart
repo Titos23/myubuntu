@@ -53,12 +53,12 @@ class _PassTileState extends State<PassTile> {
                     const SizedBox(height: 4.0),
                     buildDate(),
                     const SizedBox(height: 4.0),
-                    // Text(widget.item.code,
-                    //   style: GoogleFonts.lato(
-                    //       fontSize: 10.0,
-                    //       fontWeight: FontWeight.bold,
-                    //       fontStyle: FontStyle.italic),
-                    // ),
+                    Text(widget.item.code,
+                      style: GoogleFonts.lato(
+                          fontSize: 10.0,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic),
+                    ),
                     
                   ],
                 ),

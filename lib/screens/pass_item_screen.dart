@@ -74,7 +74,7 @@ class _PassItemScreenState extends State<PassItemScreen> {
                   _timeOfDay.hour,
                   _timeOfDay.minute,
                 ),
-                //code: _code,
+                code: _code,
               
               );
 
@@ -83,12 +83,10 @@ class _PassItemScreenState extends State<PassItemScreen> {
               } else {
                 widget.onCreate(passItem);
                 final db = Provider.of<PassManager>(context, listen: false).db;
-                //final dab = FirebaseFirestore.instance.collection("myubuntu").doc("soldpass").collection(Provider.of<AppStateManager>(context, listen: false).username);
-                //dab.doc(passItem.id).set(passItem.toMap());
-               db.add(passItem);
+                final dab = FirebaseFirestore.instance.collection("myubuntu").doc("soldpass").collection(Provider.of<AppStateManager>(context, listen: false).username);
+                dab.doc(passItem.id).set(passItem.toMap());
+                db.add(passItem);
                 
-                //print(Provider.of<PassManager>(context, listen: false).passItems.length);
-                //print('a');
               }
             },
           )
@@ -122,7 +120,7 @@ class _PassItemScreenState extends State<PassItemScreen> {
                   _timeOfDay.hour,
                   _timeOfDay.minute,
                 ),
-                //code: _code,
+                code: _code,
               ),
             ),
           ],
