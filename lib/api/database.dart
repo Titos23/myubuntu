@@ -33,7 +33,7 @@ class PassDatabase {
   }
 
   Future _createDB(Database db, int version) async {
-    await db.execute("CREATE TABLE $dbname(${PassFields.id} TEXT PRIMARY KEY ,${PassFields.name} TEXT ,${PassFields.date} TEXT NOT NULL)");
+    await db.execute("CREATE TABLE $dbname(${PassFields.id} TEXT PRIMARY KEY ,${PassFields.name} TEXT ,${PassFields.date} TEXT)");
   }
 
   Future<int> add(PassItem passItem) async {
@@ -50,8 +50,9 @@ class PassDatabase {
       columns: PassFields.values,
       orderBy: orderBy,
     );
-    
+    print(result.map((json) => PassItem.fromMap(json)).toList());
     return result.map((json) => PassItem.fromMap(json)).toList();
+
   }
   Future close() async {
     final dbl = await instance.database;

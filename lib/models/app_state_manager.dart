@@ -15,7 +15,7 @@ class AppStateManager extends ChangeNotifier {
   bool? get isLoggedIn => _loggedIn;
 
 
-  late String username;
+  String username = 'hello';
   
   signup() {
     _signedup = true;

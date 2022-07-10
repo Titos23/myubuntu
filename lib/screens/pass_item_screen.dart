@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:barcode_scan2/barcode_scan2.dart';
 
 import '../components/pass_tile.dart';
 import '../models/models.dart';
@@ -53,6 +54,7 @@ class _PassItemScreenState extends State<PassItemScreen> {
   DateTime _dueDate = DateTime.now();
   TimeOfDay _timeOfDay = TimeOfDay.now();
   Color _currentColor = Colors.amber;
+  String _code = '';
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +74,7 @@ class _PassItemScreenState extends State<PassItemScreen> {
                   _timeOfDay.hour,
                   _timeOfDay.minute,
                 ),
+                //code: _code,
               
               );
 
@@ -80,9 +83,12 @@ class _PassItemScreenState extends State<PassItemScreen> {
               } else {
                 widget.onCreate(passItem);
                 final db = Provider.of<PassManager>(context, listen: false).db;
-                final dab = FirebaseFirestore.instance.collection("myubuntu").doc("soldpass").collection(Provider.of<AppStateManager>(context, listen: false).username);
-                dab.doc(passItem.id).set(passItem.toMap());
-                db.add(passItem);
+                //final dab = FirebaseFirestore.instance.collection("myubuntu").doc("soldpass").collection(Provider.of<AppStateManager>(context, listen: false).username);
+                //dab.doc(passItem.id).set(passItem.toMap());
+               db.add(passItem);
+                
+                //print(Provider.of<PassManager>(context, listen: false).passItems.length);
+                //print('a');
               }
             },
           )
@@ -102,6 +108,8 @@ class _PassItemScreenState extends State<PassItemScreen> {
             buildDateField(context),
             const SizedBox(height: 16.0),
             buildTimeField(context),
+            const SizedBox(height: 16.0),
+            buildCodeField(context),
             const SizedBox(height: 26.0),
             PassTile(
               item: PassItem(
@@ -114,6 +122,7 @@ class _PassItemScreenState extends State<PassItemScreen> {
                   _timeOfDay.hour,
                   _timeOfDay.minute,
                 ),
+                //code: _code,
               ),
             ),
           ],
@@ -218,6 +227,35 @@ class _PassItemScreenState extends State<PassItemScreen> {
           ],
         ),
         Text('${_timeOfDay.format(context)}'),
+      ],
+    );
+  }
+
+  Widget buildCodeField(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'QR Code',
+              style: GoogleFonts.lato(fontSize: 28.0),
+            ),
+            const SizedBox(height: 20.0),
+            TextButton(
+              child: const Text('Scan'),
+              onPressed: () async {
+                
+                var result = await BarcodeScanner.scan();
+                setState(() {
+                  _code = result.rawContent;
+                });
+              },
+            ),
+          ],
+        ),
+        Text(_code),
       ],
     );
   }
