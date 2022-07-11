@@ -1,18 +1,22 @@
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../api/database.dart';
 import '../components/directory.dart';
 
 class AppStateManager extends ChangeNotifier {
  
-  bool? _loggedIn  = false;
+  bool? _loggedIn ;
   bool? _signedup = false;
-
+  bool? _initialized = false;
+  
   bool? get isSignedup => _signedup;
   bool? get isLoggedIn => _loggedIn;
+  bool? get isInitialized => _initialized;
 
 
   String username = '';
@@ -25,6 +29,26 @@ class AppStateManager extends ChangeNotifier {
   signupout () {
     _signedup = false;
     notifyListeners();
+  }
+
+  savename(String name) async {
+    final sharedPreferences =  await SharedPreferences.getInstance();
+    await sharedPreferences.setString('username', name);
+  }
+
+  readname() async{
+    final sharedPreferences = await SharedPreferences.getInstance();
+    username = sharedPreferences.getString('username')!;
+  }
+
+  void initializeApp() {
+    Timer(
+      const Duration(milliseconds: 2000),
+      () {
+        _initialized = true;
+        notifyListeners();
+      },
+    );
   }
 
   Future<void> init() async{
@@ -100,7 +124,8 @@ class AppStateManager extends ChangeNotifier {
     await FirebaseAuth.instance.signOut();
     await PassDatabase.instance.close();
     _loggedIn = false;
-    signupout();
+    _initialized = false;
+    _signedup = false;
     notifyListeners();
   }
 }
