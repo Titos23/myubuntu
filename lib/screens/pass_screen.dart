@@ -19,18 +19,6 @@ class _PassScreenState extends State<PassScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Center(child: Text('Sold Pass')),
-        actions: [
-          Padding (
-            padding: EdgeInsets.only(right: 20),child: 
-              IconButton(
-                icon: Icon(Icons.account_circle),
-                onPressed: () {
-                  final maanager = Provider.of<AppStateManager>(context, listen: false);
-                  maanager.signout();
-                },
-              ),
-          )
-        ],
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
