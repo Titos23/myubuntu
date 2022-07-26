@@ -25,11 +25,9 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreen extends State<SignUpScreen> {
   late final _emailC;
   late final _passC;
-  late final _nameC;
-
+  
   @override
   void initState() {
-    _nameC = TextEditingController();
     _passC = TextEditingController();
     _emailC = TextEditingController();
     super.initState();
@@ -64,13 +62,6 @@ class _SignUpScreen extends State<SignUpScreen> {
                 const Padding(padding: EdgeInsets.all(20)),
                 TextField(
                   decoration: InputDecoration(
-                    hintText: 'What is your name ?'
-                  ),
-                  controller: _nameC,
-                ),
-                const Padding(padding: EdgeInsets.all(20)),
-                TextField(
-                  decoration: InputDecoration(
                     hintText: 'Enter your email adress'
                   ),
                   controller: _emailC,
@@ -92,7 +83,6 @@ class _SignUpScreen extends State<SignUpScreen> {
                         onPressed: () {
                           Provider.of<AppStateManager>(context, listen: false)
                             .create(context,mail: _emailC.text, pass: _passC.text); 
-                          Provider.of<AppStateManager>(context, listen: false).username = _nameC.text; 
                           Provider.of<AppStateManager>(context, listen: false).signupout();   
                               
                         },

@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:258803514498:android:72b33bc7f28b763a66889b",
+        "mobilesdk_app_id": "1:258803514498:android:d53a8d28cfee7cf766889b",
         "android_client_info": {
-          "package_name": "com.example.myubuntu"
+          "package_name": "com.titos.myubuntu"
         }
       },
       "oauth_client": [

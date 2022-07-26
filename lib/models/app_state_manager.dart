@@ -9,13 +9,10 @@ import '../components/directory.dart';
 class AppStateManager extends ChangeNotifier {
   bool? _loggedIn = false;
   bool? _signedup = false;
-  bool _initialized = false;
+
 
   bool? get isSignedup => _signedup;
   bool? get isLoggedIn => _loggedIn;
-  bool get isInitialized => _initialized;
-
-  String username = '';
 
   signup() {
     _signedup = true;
@@ -27,20 +24,8 @@ class AppStateManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> initializeApp() async {
-    
-    Timer(
-      const Duration(milliseconds: 2000),
-      () {
-        _initialized = true;
-        notifyListeners();
-      },
-      
-    );
-  }
 
   Future<void> init() async {
-    await initializeApp();
     await requestPermission(Permission.storage);
     FirebaseAuth.instance.userChanges().listen((user) {
       if (user != null) {
