@@ -33,7 +33,7 @@ class _FooderlichState extends State<Fooderlich> {
       appStateManager: _appStateManager,
       passManager: _passManager,
     );
-    _appStateManager.init();
+     _appStateManager.init();
     
   }
 

@@ -36,9 +36,9 @@ class AppRouter extends RouterDelegate
       onPopPage: _handlePopPage,
       // 8
       pages: [
-        if (appStateManager.isLoggedIn ==false) LoginScreen.page(),
+        if (!appStateManager.isInitialized) SplashScreen.page(),
+        if (appStateManager.isLoggedIn ==false && appStateManager.isInitialized) LoginScreen.page(),
         if (appStateManager.isSignedup == true) SignUpScreen.page(),
-        // if (appStateManager.isLoggedIn == false && appStateManager.isSignedup == true) SignUpScreen.page(),
         if (appStateManager.isLoggedIn == true) Home.page(),
         if (passManager.isCreatingNewItem)
           PassItemScreen.page(onCreate: (item) {

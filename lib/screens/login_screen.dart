@@ -45,7 +45,6 @@ class _LoginScreen extends State<LoginScreen> {
         }
       },
       child: Scaffold(
-        appBar:AppBar(),
         body:  Padding(
           padding: const EdgeInsets.all(5),
           child: SingleChildScrollView(
@@ -54,31 +53,38 @@ class _LoginScreen extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                Padding(padding: EdgeInsets.all(20),),
                 const Padding(padding: EdgeInsets.all(20)),
                 SizedBox(
                   height: 200,
                   child: Image.asset('assets/lgw.jpg'),
                 ),
                 const Padding(padding: EdgeInsets.all(20)),
-                TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
+                Padding(
+                  padding: EdgeInsets.all(10),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      labelText: 'Email',
                     ),
-                    labelText: 'Email',
+                    controller: _nameC,
                   ),
-                  controller: _nameC,
                 ),
-                const Padding(padding: EdgeInsets.all(20)),
-                TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
+                const Padding(padding: EdgeInsets.all(10)),
+                Padding(
+                  padding: EdgeInsets.all(10),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      labelText: 'Password',
                     ),
-                    labelText: 'Password',
+                    obscureText: true,
+                    controller: _passC,
                   ),
-                  obscureText: true,
-                  controller: _passC,
                 ),
                 const Padding(padding: EdgeInsets.all(20)),
                 ButtonBar(

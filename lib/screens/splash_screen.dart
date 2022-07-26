@@ -1,45 +1,42 @@
-// import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 
-// import '../models/models.dart';
 
-// class SplashScreen extends StatefulWidget {
-//   static MaterialPage page() {
-//     return MaterialPage(
-//       name: FooderlichPages.splashPath,
-//       key: ValueKey(FooderlichPages.splashPath),
-//       child: const SplashScreen(),
-//     );
-//   }
+import '../models/models.dart';
 
-//   const SplashScreen({Key? key}) : super(key: key);
+class SplashScreen extends StatefulWidget {
+  static MaterialPage page() {
+    return MaterialPage(
+      name: FooderlichPages.splashPath,
+      key: ValueKey(FooderlichPages.splashPath),
+      child: const SplashScreen(),
+    );
+  }
 
-//   @override
-//   _SplashScreenState createState() => _SplashScreenState();
-// }
+  const SplashScreen({Key? key}) : super(key: key);
 
-// class _SplashScreenState extends State<SplashScreen> {
-//   @override
-//   void didChangeDependencies() {
-//     super.didChangeDependencies();
-//     Provider.of<AppStateManager>(context, listen: false).initializeApp();
-//   }
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             const Image(
-//               height: 200,
-//               image: AssetImage('assets/fooderlich_assets/rw_logo.png'),
-//             ),
-//             const Text('Initializing...')
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/lgw.jpg'),
+            const Text('Initializing...')
+          ],
+        ),
+      ),
+    );
+  }
+}
