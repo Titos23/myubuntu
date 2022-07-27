@@ -3,7 +3,7 @@
 
 # My Ubuntu
 
-In this project, we'll develop a mobile app which will be used for the Ubuntu Event and for other events. With this application, you can save the custumer's name, and several information about the pass we sold.
+With this application, you can save the custumer's name, and several information about the tickets we sold. These informations are stored locally on the device and on a database online. For that to be achieved, the app requires internet connection to work conveniently
 
 
 ## Screenshots
