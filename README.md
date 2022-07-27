@@ -1,5 +1,9 @@
+
+<img src = https://user-images.githubusercontent.com/77001434/181356558-4b8f0cc3-4af9-42d1-88bc-6525b0de9b6e.png> 
+
 # My Ubuntu
-In this project, we'll develop a mobile app which will be used for the Ubuntu Event and for other events. With this application, you can save the custumer's name, and several information abaout the pass we sold.
+
+In this project, we'll develop a mobile app which will be used for the Ubuntu Event and for other events. With this application, you can save the custumer's name, and several information about the pass we sold.
 
 
 ## Screenshots
