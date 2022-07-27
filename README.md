@@ -3,7 +3,7 @@
 
 # My Ubuntu
 
-With this application, you can save the custumer's name, and several information about the tickets we sold. These informations are stored locally on the device and on a database online. For that to be achieved, the app requires internet connection to work conveniently
+With this application, you can save the custumer's name, and several information about the tickets we sell. These informations are stored locally on the device and on Firestore online database. For that to be achieved, the app requires internet connection to work conveniently
 
 
 ## Screenshots
